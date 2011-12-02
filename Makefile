@@ -1,11 +1,8 @@
 NODE = node
-TEST = expresso
-TESTS ?= test/*.test.js
+TEST = vows
+TESTS ?= test/*-test.js
 
 test:
-	@NODE_ENV=test $(TEST) -I lib $(TEST_FLAGS) $(TESTS)
-
-test-cov:
-	@$(MAKE) test TEST_FLAGS="--cov"
+	@NODE_ENV=test NODE_PATH=lib $(TEST) $(TEST_FLAGS) $(TESTS)
 
 .PHONY: test test-cov

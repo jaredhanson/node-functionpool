@@ -1,13 +1,13 @@
-var workerpool = require('../lib/worker-pool');
+var functionpool = require('functionpool');
 
-var pool = new workerpool.Pool(function(delay, finish) {
+var pool = new functionpool.Pool(function(delay, done) {
   if (delay < 0) {
-    finish(new Error('delay must be greater than zero'));
+    done(new Error('delay must be greater than zero'));
     return;
   }
   
   console.log('Working for ' + delay + ' milliseconds...');
-  setTimeout(function() { finish(delay) }, delay);
+  setTimeout(function() { done(null, delay) }, delay);
 });
 
 function callback(err, result) {
@@ -17,6 +17,7 @@ function callback(err, result) {
   }
   console.log('Worked for ' + result + ' milliseconds.');
 }
+
 
 pool.add(1000, callback);
 pool.add(-1, callback);

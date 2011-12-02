@@ -1,12 +1,17 @@
-var workerpool = require('../lib/worker-pool');
+var functionpool = require('functionpool');
 
-var pool = new workerpool.Pool(function(delay, finish) {
+var startedAt = Date.now();
+
+var pool = new functionpool.Pool({ size: 3 }, function(delay, done) {
   console.log('Working for ' + delay + ' milliseconds...');
-  setTimeout(finish, delay);
+  setTimeout(done, delay);
 });
 
+pool.on('idle', function() {
+  console.log('Finished (' + (Date.now() - startedAt) + ' ms)');
+});
 
-pool.add(1000);
-pool.add(2000);
-pool.add(3000);
-pool.add(1000);
+pool.task(1000);
+pool.task(2000);
+pool.task(3000);
+pool.task(1000);
