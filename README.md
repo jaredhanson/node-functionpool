@@ -35,6 +35,11 @@ queued for later execution otherwise.
       console.log('3 + 14 = ' + res);
     });
 
+## Tests
+
+    $ npm install --dev
+    $ make test
+
 ## Credits
 
   - [Jared Hanson](http://github.com/jaredhanson)
