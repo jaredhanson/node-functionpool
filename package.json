@@ -1,6 +1,6 @@
 {
   "name": "functionpool",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Provides a pool of functions that can be used to execute tasks in Node.js.",
   "author": { "name": "Jared Hanson", "email": "jaredhanson@gmail.com", "url": "http://www.jaredhanson.net/" },
   "repository": {
