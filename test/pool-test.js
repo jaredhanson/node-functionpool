@@ -34,6 +34,10 @@ vows.describe('Pool').addBatch({
       assert.isFalse(pool.task());
       assert.equal(pool._queue.length, 2);
     },
+    'should have no items in queue after clearing': function (pool) {
+      pool.clearQueue();
+      assert.equal(pool._queue.length, 0);
+    },
   },
   
   'pool with specific size option': {
