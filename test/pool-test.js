@@ -60,7 +60,30 @@ vows.describe('Pool').addBatch({
     },
   },
   
-  'pool that works and then idles': {
+  'pool with single worker that works and then idles': {
+    topic: function() {
+      var self = this;
+      var count = 0;
+      var pool = new Pool({ size: 1 }, function(done) {
+        count++;
+        setTimeout(done, 100);
+      });
+      pool.on('idle', function() {
+        self.callback(null, pool, count);
+      });
+      pool.task();
+      pool.task();
+      pool.task();
+      pool.task();
+      pool.task();
+    },
+    
+    'should work 5 times': function (err, pool, count) {
+      assert.equal(count, 5);
+    },
+  },
+  
+  'pool with multiple workers that works and then idles': {
     topic: function() {
       var self = this;
       var count = 0;
