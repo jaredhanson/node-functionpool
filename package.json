@@ -2,14 +2,24 @@
   "name": "functionpool",
   "version": "0.1.0",
   "description": "Provides a pool of functions that can be used to execute tasks in Node.js.",
-  "author": "Jared Hanson <jaredhanson@gmail.com> (http://www.jaredhanson.net/)",
+  "author": { "name": "Jared Hanson", "email": "jaredhanson@gmail.com", "url": "http://www.jaredhanson.net/" },
   "repository": {
     "type": "git",
-    "url": "http://github.com/jaredhanson/node-functionpool.git"
+    "url": "git://github.com/jaredhanson/node-functionpool.git"
+  },
+  "bugs": {
+    "url": "http://github.com/jaredhanson/node-functionpool/issues"
   },
   "main": "./lib/functionpool",
   "dependencies": {
   },
+  "devDependencies": {
+    "vows": "0.6.x"
+  },
   "engines": { "node": ">= 0.4.0" },
+  "licenses": [ {
+    "type": "MIT",
+    "url": "http://www.opensource.org/licenses/MIT" 
+  } ],
   "keywords": ["pool", "queue", "function", "thread", "task"]
 }
