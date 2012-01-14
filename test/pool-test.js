@@ -110,6 +110,67 @@ vows.describe('Pool').addBatch({
     },
   },
   
+  'pool with multiple workers that fail': {
+    topic: function() {
+      var self = this;
+      var count = 0;
+      var failCount = 0;
+      var pool = new Pool({ size: 3 }, function(done) {
+        count++;
+        setTimeout(function() { done(new Error('something went wrong')); }, 100);
+      });
+      pool.on('fail', function() {
+        failCount++;
+      });
+      pool.on('idle', function() {
+        self.callback(null, pool, count, failCount);
+      });
+      pool.task();
+      pool.task();
+      pool.task();
+      pool.task();
+      pool.task();
+    },
+    
+    'should work 5 times': function (err, pool, count) {
+      assert.equal(count, 5);
+    },
+    'should fail 5 times': function (err, pool, count, failCount) {
+      assert.equal(failCount, 5);
+    },
+  },
+  
+  'pool that clears queue after a worker fails': {
+    topic: function() {
+      var self = this;
+      var count = 0;
+      var failCount = 0;
+      var pool = new Pool({ size: 3 }, function(done) {
+        count++;
+        setTimeout(function() { done(new Error('something went wrong')); }, 100);
+      });
+      pool.on('fail', function() {
+        failCount++;
+        pool.clearQueue();
+      });
+      pool.on('idle', function() {
+        self.callback(null, pool, count, failCount);
+      });
+      pool.task();
+      pool.task();
+      pool.task();
+      pool.task();
+      pool.task();
+    },
+    
+    'should work 3 times': function (err, pool, count) {
+      assert.equal(count, 3);
+    },
+    'should fail 3 times': function (err, pool, count, failCount) {
+      assert.equal(failCount, 3);
+    },
+  },
+  
   'pool should pass arguments to worker': {
     topic: function() {
       var self = this;
