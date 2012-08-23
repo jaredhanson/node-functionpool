@@ -1,3 +1,4 @@
+[![build status](https://secure.travis-ci.org/jaredhanson/node-functionpool.png)](http://travis-ci.org/jaredhanson/node-functionpool)
 # Function Pool
 
 Function Pool provides a fixed-size pool that can be used to execute potentially
