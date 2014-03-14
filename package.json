@@ -10,7 +10,7 @@
   "bugs": {
     "url": "http://github.com/jaredhanson/node-functionpool/issues"
   },
-  "main": "./lib/functionpool",
+  "main": "./lib",
   "dependencies": {
   },
   "devDependencies": {
